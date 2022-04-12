@@ -24,6 +24,7 @@ class LinkedList:
     def Pop(self):
         temp=self.head
         self.head=temp.next
+        temp.next=None
         return temp
 
     def Reverse(self):
@@ -32,15 +33,18 @@ class LinkedList:
     def PopTilEmpty(self):
         if(self.head):
             current = self.Pop()
-            print(current.name + "Popped")
             self.PopTilEmpty();
             self.EnQueue(current);
-            print(current.name + "Queued")
-
-
-
-
-
+            
+    def RPrint(self):
+        print(self.RecursePrint(self.head))
+    
+    def RecursePrint(self,node):
+        name=node.name
+        if (node.next):
+            name+=", "+self.RecursePrint(node.next)
+        return name
+        
     def Print(self):
         alphabet=""
         current = self.head
@@ -66,6 +70,6 @@ if (__name__=="__main__"):
     for char in string.ascii_lowercase:
         letterList.EnQueue(Node(char))
 
-
+letterList.RPrint()
 letterList.Reverse()
-letterList.Print()
+letterList.RPrint()
